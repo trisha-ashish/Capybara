@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Caramel Capy Hugs ☕✨</title>
+<style>
+:root {
+--cream-bg: #FFF9F2;
+--oat-card: #F6ECE0;
+--latte-warm: #EAD4BC;
+--caramel: #C68B59;
+--caramel-deep: #A66E3E;
+--espresso: #4A3222;
+--espresso-soft: #7A5842;
+--sage: #8DA894;
+--sage-deep: #6C8974;
+--berry-blush: #F3A69E;
+--gold-star: #F4B942;
+--alert-dot: #E5484D;
+--onsen-blue: #9CD4E6;
+--onsen-deep: #6FB7D0;
+}
+
+* {
+box-sizing: border-box;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+*:focus,
+*:focus-visible,
+*:active {
+outline: none !important;
+box-shadow: none;
+}
+
+html, body {
+margin: 0;
+padding: 0;
+min-height: 100%;
+font-family: "Trebuchet MS", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+background: linear-gradient(180deg, #FFFDF9 0%, #FBF0E3 55%, #F4E3CE 100%);
+color: var(--espresso);
+overflow-x: hidden;
+}
+
+.dotted-bg {
+position: fixed;
+inset: 0;
+background-image: radial-gradient(rgba(166, 110, 62, 0.14) 1.35px, transparent 1.35px);
+background-size: 22px 22px;
+pointer-events: none;
+z-index: 0;
+}
+
+.app-shell {
+position: relative;
+z-index: 10;
+max-width: 460px;
+margin: 0 auto;
+min-height: 100dvh;
+padding: 16px 16px 36px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.top-bar {
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 8px;
+margin-bottom: 14px;
+}
+
+.stats-pill {
+display: flex;
+align-items: center;
+gap: 6px;
+background: #FFFFFF;
+border: 2px solid #EAD8C5;
+border-radius: 999px;
+padding: 6px 10px;
+box-shadow: 0 4px 14px rgba(130, 88, 52, 0.08);
+font-weight: 700;
+font-size: 13.5px;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.stats-pill:active {
+transform: scale(0.97);
+}
+
+.pill-item {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+padding: 2px 4px;
+}
+
+.pill-divider {
+width: 1.5px;
+height: 15px;
+background: #E4D0BA;
+}
+
+.stats-label-btn {
+background: #F4E6D6;
+color: var(--espresso);
+border-radius: 999px;
+padding: 3px 9px;
+font-size: 12.5px;
+font-weight: 700;
+}
+
+.right-actions {
+display: flex;
+align-items: center;
+gap: 7px;
+}
+
+.icon-btn {
+width: 38px;
+height: 38px;
+border-radius: 50%;
+border: 2px solid #E5D2BE;
+background: #FFFFFF;
+color: var(--espresso);
+display: grid;
+place-items: center;
+font-size: 16px;
+cursor: pointer;
+touch-action: manipulation;
+box-shadow: 0 4px 12px rgba(130, 88, 52, 0.08);
+}
+
+.icon-btn:active {
+transform: scale(0.94);
+}
+
+.notes-btn {
+position: relative;
+display: inline-flex;
+align-items: center;
+gap: 7px;
+background: linear-gradient(180deg, #96B29D 0%, #7C9A84 100%);
+color: #FFFFFF;
+border: none;
+border-radius: 18px;
+padding: 7px 13px;
+font-family: inherit;
+font-weight: 700;
+font-size: 12.5px;
+line-height: 1.1;
+cursor: pointer;
+touch-action: manipulation;
+box-shadow: 0 5px 14px rgba(108, 137, 116, 0.32);
+}
+
+.notes-btn:active {
+transform: scale(0.96);
+}
+
+.notes-count-badge {
+background: rgba(255, 255, 255, 0.28);
+color: #FFFFFF;
+border-radius: 999px;
+padding: 2px 7px;
+font-size: 12px;
+font-weight: 700;
+}
+
+.unread-red-dot {
+position: absolute;
+top: -4px;
+right: -4px;
+width: 14px;
+height: 14px;
+border-radius: 50%;
+background: var(--alert-dot);
+border: 2.5px solid #FFFDF9;
+display: none;
+}
+
+.unread-red-dot.show {
+display: block;
+}
+
+.hero-header {
+text-align: center;
+margin-top: 6px;
+margin-bottom: 8px;
+}
+
+.hero-title {
+font-size: 30px;
+font-weight: 700;
+margin: 0;
+color: var(--espresso);
+letter-spacing: 0.3px;
+}
+
+.hero-subtitle {
+margin: 4px 0 6px;
+font-size: 14px;
+color: var(--espresso-soft);
+font-weight: 600;
+}
+
+.capy-name-chip {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+background: #FFFFFF;
+border: 1.5px dashed #D6B899;
+border-radius: 999px;
+padding: 4px 12px;
+font-size: 12.5px;
+font-weight: 700;
+color: var(--caramel-deep);
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.stage-wrap {
+position: relative;
+width: 100%;
+max-width: 340px;
+aspect-ratio: 1 / 1;
+display: grid;
+place-items: center;
+margin: 8px auto 6px;
+touch-action: none;
+}
+
+.dotted-ring {
+position: absolute;
+width: 86%;
+height: 86%;
+border-radius: 50%;
+border: 3px dashed rgba(198, 139, 89, 0.36);
+pointer-events: none;
+transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stage-wrap.hugging .dotted-ring {
+border-color: rgba(244, 185, 66, 0.9);
+transform: scale(1.04);
+}
+
+#capySvg {
+width: 92%;
+height: 92%;
+cursor: pointer;
+touch-action: none;
+overflow: visible;
+filter: drop-shadow(0 12px 20px rgba(110, 72, 41, 0.14));
+}
+
+.capy-idle {
+transform-origin: 180px 195px;
+animation: gentleFloat 3.4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+0%, 100% { transform: translateY(0px) scaleY(1) scaleX(1); }
+50% { transform: translateY(-4px) scaleY(1.018) scaleX(0.99); }
+}
+
+.capy-squish {
+transform-origin: 180px 210px;
+transform: translateY(4px) scaleX(1.08) scaleY(0.92);
+}
+
+.yuzu-bob {
+transform-origin: 180px 82px;
+animation: yuzuTilt 2.8s ease-in-out infinite;
+}
+
+@keyframes yuzuTilt {
+0%, 100% { transform: rotate(-3deg); }
+50% { transform: rotate(3.5deg); }
+}
+
+.steam-line {
+fill: none;
+stroke: rgba(255, 255, 255, 0.85);
+stroke-width: 3;
+stroke-linecap: round;
+}
+
+.floating-pop {
+position: absolute;
+pointer-events: none;
+font-weight: 700;
+font-size: 16px;
+color: var(--espresso);
+background: rgba(255, 255, 255, 0.92);
+padding: 4px 10px;
+border-radius: 999px;
+box-shadow: 0 4px 12px rgba(110, 72, 41, 0.14);
+z-index: 20;
+}
+
+.hold-meter-wrap {
+width: 100%;
+max-width: 280px;
+height: 12px;
+background: #EAD9C7;
+border-radius: 999px;
+overflow: hidden;
+margin: 6px auto 10px;
+box-shadow: inset 0 2px 4px rgba(110, 72, 41, 0.12);
+}
+
+.hold-meter-fill {
+height: 100%;
+width: 0%;
+background: linear-gradient(90deg, #E8A86C, #F4B942, #F39C8C);
+border-radius: 999px;
+transition: width 0.06s linear;
+}
+
+.goal-status-line {
+font-size: 13px;
+font-weight: 700;
+letter-spacing: 0.6px;
+color: var(--espresso-soft);
+text-align: center;
+margin-bottom: 12px;
+}
+
+.goal-status-line span.gold-text {
+color: #C88A16;
+}
+
+.hug-note-card {
+width: 100%;
+background: #FFFFFF;
+border: 2px solid #EAD6C1;
+border-radius: 24px;
+padding: 16px 18px;
+box-shadow: 0 10px 26px rgba(133, 88, 50, 0.09);
+margin-bottom: 14px;
+position: relative;
+}
+
+.note-meta-row {
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-size: 11.5px;
+font-weight: 700;
+color: var(--caramel-deep);
+margin-bottom: 6px;
+}
+
+.note-body-text {
+font-size: 18px;
+line-height: 1.42;
+color: var(--espresso);
+margin: 0;
+white-space: pre-line;
+}
+
+.bottom-hint {
+font-size: 12.5px;
+color: var(--espresso-soft);
+text-align: center;
+font-weight: 600;
+}
+
+.quick-actions {
+width: 100%;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-top: 12px;
+}
+
+.soft-action-btn {
+background: #FFFFFF;
+border: 2px solid #E7D3BE;
+border-radius: 18px;
+padding: 11px 12px;
+font-family: inherit;
+font-weight: 700;
+font-size: 13px;
+color: var(--espresso);
+cursor: pointer;
+touch-action: manipulation;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+box-shadow: 0 4px 12px rgba(133, 88, 50, 0.07);
+}
+
+.soft-action-btn:active {
+transform: scale(0.97);
+}
+
+.modal-backdrop {
+position: fixed;
+inset: 0;
+background: rgba(56, 36, 22, 0.52);
+z-index: 100;
+display: none;
+align-items: flex-end;
+justify-content: center;
+padding: 12px;
+}
+
+.modal-backdrop.open {
+display: flex;
+}
+
+.modal-sheet {
+width: 100%;
+max-width: 460px;
+max-height: 86dvh;
+background: #FFFBF6;
+border: 2px solid #EAD7C3;
+border-radius: 28px;
+padding: 20px 18px 24px;
+overflow-y: auto;
+box-shadow: 0 20px 50px rgba(45, 26, 13, 0.25);
+}
+
+.modal-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+}
+
+.modal-title {
+font-size: 24px;
+font-weight: 700;
+margin: 0;
+color: var(--espresso);
+}
+
+.close-modal-btn {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+border: none;
+background: #F2E4D5;
+color: var(--espresso);
+font-size: 16px;
+font-weight: 700;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.rank-banner {
+background: linear-gradient(135deg, #F8E5CE 0%, #EFE2F5 100%);
+border: 2px solid #E4CEB5;
+border-radius: 20px;
+padding: 14px;
+margin-bottom: 14px;
+}
+
+.rank-top {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-weight: 700;
+margin-bottom: 8px;
+font-size: 13.5px;
+}
+
+.xp-bar-bg {
+height: 10px;
+background: rgba(255, 255, 255, 0.8);
+border-radius: 999px;
+overflow: hidden;
+}
+
+.xp-bar-fill {
+height: 100%;
+background: linear-gradient(90deg, #C68B59, #F4B942);
+border-radius: 999px;
+}
+
+.kpi-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+margin-bottom: 14px;
+}
+
+.kpi-box {
+background: #FFF6EC;
+border: 1.5px solid #EAD8C5;
+border-radius: 18px;
+padding: 12px;
+text-align: center;
+}
+
+.kpi-val {
+font-size: 22px;
+font-weight: 700;
+color: var(--espresso);
+}
+
+.kpi-lbl {
+font-size: 12px;
+color: var(--espresso-soft);
+font-weight: 600;
+margin-top: 2px;
+}
+
+.weekly-chart-box {
+background: #FFF6EC;
+border: 1.5px solid #EAD8C5;
+border-radius: 20px;
+padding: 14px;
+margin-bottom: 14px;
+}
+
+.bars-row {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+gap: 6px;
+align-items: end;
+height: 112px;
+padding-top: 16px;
+}
+
+.bar-col {
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 100%;
+justify-content: flex-end;
+}
+
+.bar-num {
+font-size: 10.5px;
+font-weight: 700;
+color: var(--caramel-deep);
+margin-bottom: 3px;
+}
+
+.bar-track {
+width: 100%;
+max-width: 24px;
+height: 68px;
+background: #EFE1D2;
+border-radius: 999px;
+display: flex;
+align-items: flex-end;
+overflow: hidden;
+}
+
+.bar-fill {
+width: 100%;
+background: linear-gradient(180deg, #F4B942 0%, #C68B59 100%);
+border-radius: 999px;
+}
+
+.bar-day {
+font-size: 11px;
+font-weight: 700;
+color: var(--espresso-soft);
+margin-top: 5px;
+}
+
+.category-tabs {
+display: flex;
+gap: 6px;
+overflow-x: auto;
+padding-bottom: 6px;
+margin-bottom: 12px;
+}
+
+.cat-tab {
+border: 1.5px solid #E5D1BC;
+background: #FFF7EE;
+color: var(--espresso);
+border-radius: 999px;
+padding: 6px 12px;
+font-family: inherit;
+font-size: 12px;
+font-weight: 700;
+white-space: nowrap;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.cat-tab.active {
+background: var(--caramel);
+color: #FFFFFF;
+border-color: var(--caramel);
+}
+
+.rewards-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+}
+
+.reward-card {
+background: #FFF8F0;
+border: 2px solid #EAD7C3;
+border-radius: 20px;
+padding: 12px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+gap: 8px;
+}
+
+.reward-emoji {
+font-size: 28px;
+text-align: center;
+}
+
+.reward-name {
+font-weight: 700;
+font-size: 13.5px;
+text-align: center;
+}
+
+.reward-desc {
+font-size: 11px;
+color: var(--espresso-soft);
+text-align: center;
+}
+
+.reward-btn {
+width: 100%;
+border: none;
+border-radius: 14px;
+padding: 8px;
+font-family: inherit;
+font-weight: 700;
+font-size: 12px;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.reward-btn.buy {
+background: #F4B942;
+color: #3E2716;
+}
+
+.reward-btn.buy:disabled {
+background: #E8DDD2;
+color: #9C897A;
+cursor: not-allowed;
+}
+
+.reward-btn.equip {
+background: #E8F2EB;
+color: #3D6349;
+}
+
+.reward-btn.equipped {
+background: #7C9A84;
+color: #FFFFFF;
+}
+
+.note-entry-card {
+background: #FFFFFF;
+border: 1.5px solid #EAD7C3;
+border-radius: 18px;
+padding: 13px 15px;
+margin-bottom: 10px;
+}
+
+.note-entry-card.is-new {
+border-color: #F3A69E;
+background: #FFFDFB;
+}
+
+.note-stamp {
+font-size: 11px;
+font-weight: 700;
+color: var(--caramel-deep);
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 5px;
+}
+
+.new-pill {
+background: #FFE4E6;
+color: #C92A37;
+padding: 2px 7px;
+border-radius: 999px;
+font-size: 10px;
+font-weight: 700;
+}
+
+.creator-footer-link {
+margin-top: 14px;
+text-align: center;
+}
+
+.creator-trigger-btn {
+background: #FFFFFF;
+border: 1.5px dashed #D3B494;
+color: var(--espresso-soft);
+border-radius: 999px;
+padding: 7px 14px;
+font-family: inherit;
+font-size: 12px;
+font-weight: 700;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.pin-input, .note-textarea, .nick-select, .name-input {
+width: 100%;
+border: 1.5px solid #DEC7AE;
+border-radius: 14px;
+padding: 10px 12px;
+font-family: inherit;
+font-size: 14px;
+color: var(--espresso);
+background: #FFFFFF;
+margin-bottom: 10px;
+-webkit-user-select: text;
+user-select: text;
+}
+
+.primary-btn {
+width: 100%;
+border: none;
+border-radius: 16px;
+padding: 11px 14px;
+background: linear-gradient(180deg, #C68B59 0%, #A66E3E 100%);
+color: #FFFFFF;
+font-family: inherit;
+font-weight: 700;
+font-size: 14px;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.mini-action-row {
+display: flex;
+gap: 8px;
+margin-top: 8px;
+}
+
+.mini-btn {
+border: none;
+border-radius: 10px;
+padding: 5px 10px;
+font-size: 11.5px;
+font-weight: 700;
+cursor: pointer;
+touch-action: manipulation;
+}
+
+.mini-btn.edit { background: #F4E6D6; color: var(--espresso); }
+.mini-btn.del { background: #FFE3E3; color: #B52B2B; }
+</style>
+</head>
+<body>
+<div class="dotted-bg"></div>
+
+<div class="app-shell" id="appRoot">
+<div class="top-bar">
+<div class="stats-pill" id="statsPillBtn" role="button" tabindex="0">
+<div class="pill-item">🤗 <span id="topHugsCount">0</span></div>
+<div class="pill-divider"></div>
+<div class="pill-item">⭐ <span id="topStarsCount">0</span></div>
+<div class="stats-label-btn">Stats</div>
+</div>
+
+<div class="right-actions">
+<button type="button" class="icon-btn" id="soundToggleBtn" aria-label="Toggle sound">🔊</button>
+<button type="button" class="notes-btn" id="notesHeaderBtn">
+<span class="unread-red-dot" id="unreadRedDot"></span>
+<span>✏️</span>
+<span>My<br>Notes</span>
+<span class="notes-count-badge" id="notesBadgeCount">0</span>
+</button>
+</div>
+</div>
+
+<div class="hero-header">
+<h1 class="hero-title">A Warm Capybara Hug</h1>
+<p class="hero-subtitle">Press and hold the capybara to give a cozy squeeze</p>
+<div class="capy-name-chip" id="capyNameChipBtn" role="button" tabindex="0">
+<span>☕ Capy Name: <strong id="capyNameDisplay">Caramel Bean</strong></span>
+<span>✎</span>
+</div>
+</div>
+
+<div class="stage-wrap" id="stageWrap">
+<div class="dotted-ring"></div>
+
+<svg id="capySvg" viewBox="0 0 360 340" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="bathWaterGrad" cx="50%" cy="35%" r="65%">
+<stop offset="0%" stop-color="#BCE7F5" />
+<stop offset="100%" stop-color="#87C7DC" />
+</radialGradient>
+<radialGradient id="latteBathGrad" cx="50%" cy="35%" r="65%">
+<stop offset="0%" stop-color="#F6DEC0" />
+<stop offset="100%" stop-color="#D7A778" />
+</radialGradient>
+<radialGradient id="moonBathGrad" cx="50%" cy="35%" r="65%">
+<stop offset="0%" stop-color="#4A4E8C" />
+<stop offset="100%" stop-color="#252854" />
+</radialGradient>
+<linearGradient id="capyFurGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#B87E52" />
+<stop offset="100%" stop-color="#965F37" />
+</linearGradient>
+<linearGradient id="snoutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#9B633B" />
+<stop offset="100%" stop-color="#7B4A28" />
+</linearGradient>
+</defs>
+
+<path class="steam-line" d="M115 190 Q108 175 116 162" />
+<path class="steam-line" d="M245 190 Q252 175 244 162" />
+<path class="steam-line" d="M180 125 Q173 110 181 98" />
+
+<ellipse cx="95" cy="215" rx="22" ry="13" fill="#B5B9BE" />
+<ellipse cx="122" cy="204" rx="18" ry="11" fill="#C4C8CD" />
+<ellipse cx="265" cy="215" rx="22" ry="13" fill="#B5B9BE" />
+<ellipse cx="238" cy="204" rx="18" ry="11" fill="#C4C8CD" />
+
+<g id="capyAnimGroup" class="capy-idle">
+<ellipse cx="124" cy="112" rx="18" ry="15" transform="rotate(-18 124 112)" fill="#7E4D2B" />
+<ellipse cx="124" cy="113" rx="11" ry="9" transform="rotate(-18 124 113)" fill="#593319" />
+<ellipse cx="236" cy="112" rx="18" ry="15" transform="rotate(18 236 112)" fill="#7E4D2B" />
+<ellipse cx="236" cy="113" rx="11" ry="9" transform="rotate(18 236 113)" fill="#593319" />
+
+<path d="M112 238 L112 152 C112 114 142 96 180 96 C218 96 248 114 248 152 L248 238 Z" fill="url(#capyFurGrad)" />
+
+<g id="equipHeadLayer"></g>
+<g id="equipNeckLayer"></g>
+
+<ellipse cx="132" cy="168" rx="13" ry="8" fill="#F3A69E" opacity="0.68" />
+<ellipse cx="228" cy="168" rx="13" ry="8" fill="#F3A69E" opacity="0.68" />
+
+<g id="eyesNormal">
+<path d="M138 148 Q147 156 156 148" fill="none" stroke="#4A2E1B" stroke-width="3.6" stroke-linecap="round" />
+<path d="M204 148 Q213 156 222 148" fill="none" stroke="#4A2E1B" stroke-width="3.6" stroke-linecap="round" />
+</g>
+<g id="eyesHappy" style="display:none;">
+<path d="M137 151 Q147 140 157 151" fill="none" stroke="#4A2E1B" stroke-width="3.8" stroke-linecap="round" />
+<path d="M203 151 Q213 140 223 151" fill="none" stroke="#4A2E1B" stroke-width="3.8" stroke-linecap="round" />
+</g>
+
+<rect x="155" y="143" width="50" height="44" rx="17" fill="url(#snoutGrad)" />
+<ellipse cx="167" cy="155" rx="4.2" ry="6" transform="rotate(-12 167 155)" fill="#3E2312" />
+<ellipse cx="193" cy="155" rx="4.2" ry="6" transform="rotate(12 193 155)" fill="#3E2312" />
+<path d="M180 162 L180 174" stroke="#3E2312" stroke-width="3.2" stroke-linecap="round" />
+<path d="M167 172 Q180 182 193 172" fill="none" stroke="#3E2312" stroke-width="3.2" stroke-linecap="round" />
+
+<g id="pawsGroup">
+<ellipse cx="144" cy="216" rx="13" ry="10" fill="#8A5530" />
+<ellipse cx="216" cy="216" rx="13" ry="10" fill="#8A5530" />
+</g>
+
+<g id="defaultYuzu" class="yuzu-bob">
+<path d="M180 73 Q192 60 202 68 Q191 77 180 73 Z" fill="#7EB86A" />
+<circle cx="180" cy="83" r="15" fill="#F69E36" />
+<circle cx="175" cy="78" r="4" fill="#FFBE66" opacity="0.55" />
+</g>
+</g>
+
+<g id="bathGroup">
+<ellipse cx="180" cy="242" rx="126" ry="38" fill="#D9DFE5" />
+<ellipse id="bathWaterSurface" cx="180" cy="238" rx="116" ry="31" fill="url(#bathWaterGrad)" />
+<ellipse cx="180" cy="235" rx="92" ry="16" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2" />
+<circle cx="88" cy="238" r="9.5" fill="#F69E36" />
+<path d="M88 229 Q94 222 99 226" fill="none" stroke="#7EB86A" stroke-width="2.5" stroke-linecap="round" />
+<circle cx="272" cy="238" r="9.5" fill="#F69E36" />
+<path d="M272 229 Q278 222 283 226" fill="none" stroke="#7EB86A" stroke-width="2.5" stroke-linecap="round" />
+</g>
+</svg>
+</div>
+
+<div class="hold-meter-wrap">
+<div class="hold-meter-fill" id="holdMeterFill"></div>
+</div>
+
+<div class="goal-status-line">
+HOLD FOR 1.5S • DAILY GOAL: <span class="gold-text" id="dailyGoalText">0/5 ⭐</span>
+</div>
+
+<div class="hug-note-card" id="hugNoteCard">
+<div class="note-meta-row">
+<span id="hugNoteNicknameTag">☕ Cozy Hug Note</span>
+<span id="hugNoteTimeTag">Hold the capy to unlock a note</span>
+</div>
+<p class="note-body-text" id="hugNoteText">
+heyyy... press and hold the capybara for 1.5s to get a warm hug & a little note written just for youuuu ☕✨
+</p>
+</div>
+
+<div class="bottom-hint">Hold the capy for a nice hug and earn stars every hug ✨</div>
+
+<div class="quick-actions">
+<button type="button" class="soft-action-btn" id="openShopQuickBtn">
+<span>🎀</span>
+<span>Rewards Shop (<span id="shopStarPreview">0</span>⭐)</span>
+</button>
+<button type="button" class="soft-action-btn" id="openNotesQuickBtn">
+<span>💌</span>
+<span>All My Notes</span>
+</button>
+</div>
+</div>
+
+<div class="modal-backdrop" id="statsModal">
+<div class="modal-sheet">
+<div class="modal-header">
+<h2 class="modal-title">Hug Stats & Star Stash</h2>
+<button type="button" class="close-modal-btn" data-close="statsModal">✕</button>
+</div>
+
+<div class="rank-banner">
+<div class="rank-top">
+<span id="rankTitle">Lv.1 Sleepy Espresso Bean</span>
+<span id="rankXpText">0 / 10 Hugs</span>
+</div>
+<div class="xp-bar-bg">
+<div class="xp-bar-fill" id="rankProgressBar" style="width: 0%"></div>
+</div>
+</div>
+
+<div class="kpi-grid">
+<div class="kpi-box">
+<div class="kpi-val" id="statTotalHugs">0</div>
+<div class="kpi-lbl">Total Cozy Hugs</div>
+</div>
+<div class="kpi-box">
+<div class="kpi-val" id="statStarsBalance">0 ⭐</div>
+<div class="kpi-lbl">Stars to Spend</div>
+</div>
+<div class="kpi-box">
+<div class="kpi-val" id="statTodayHugs">0</div>
+<div class="kpi-lbl">Hugs Today</div>
+</div>
+<div class="kpi-box">
+<div class="kpi-val" id="statStreakDays">1🔥</div>
+<div class="kpi-lbl">Cozy Day Streak</div>
+</div>
+</div>
+
+<div class="weekly-chart-box">
+<div style="font-weight:700; font-size:13.5px; margin-bottom:4px;">Weekly Hugs Tracker (Mon–Sun)</div>
+<div class="bars-row" id="weeklyBarsContainer"></div>
+</div>
+
+<button type="button" class="primary-btn" id="statsToShopBtn">
+Spend Stars in Rewards Shop 🎀
+</button>
+</div>
+</div>
+
+<div class="modal-backdrop" id="rewardsModal">
+<div class="modal-sheet">
+<div class="modal-header">
+<h2 class="modal-title">Caramel Rewards Shop</h2>
+<button type="button" class="close-modal-btn" data-close="rewardsModal">✕</button>
+</div>
+<div style="font-size:13px; font-weight:700; margin-bottom:10px; color:var(--caramel-deep);">
+Your Stars: <span id="shopModalStars">0</span> ⭐ (Earn +1 ⭐ per hug, +2 ⭐ bonus on daily goal!)
+</div>
+
+<div class="category-tabs" id="categoryTabs">
+<button type="button" class="cat-tab active" data-cat="all">All</button>
+<button type="button" class="cat-tab" data-cat="hat">Headwear</button>
+<button type="button" class="cat-tab" data-cat="neck">Cozy Wear</button>
+<button type="button" class="cat-tab" data-cat="bath">Bath Vibes</button>
+</div>
+
+<div class="rewards-grid" id="rewardsGrid"></div>
+</div>
+</div>
+
+<div class="modal-backdrop" id="notesModal">
+<div class="modal-sheet">
+<div class="modal-header">
+<h2 class="modal-title" id="notesModalTitle">Notes Written For You 💌</h2>
+<button type="button" class="close-modal-btn" data-close="notesModal">✕</button>
+</div>
+
+<div id="readerNotesView">
+<div id="notesListContainer"></div>
+<div class="creator-footer-link">
+<button type="button" class="creator-trigger-btn" id="openPinBtn">🔒 Creator Desk</button>
+</div>
+</div>
+
+<div id="pinGateView" style="display:none;">
+<p style="font-size:13.5px; color:var(--espresso-soft); margin-top:0;">
+Enter your secret PIN to add or edit notes.
+</p>
+<input type="password" inputmode="numeric" maxlength="10" id="pinInputField" class="pin-input" placeholder="Enter PIN" />
+<div id="pinErrorMsg" style="color:#C92A37; font-size:12px; font-weight:700; margin-bottom:8px; display:none;">
+Wrong PIN, try again!
+</div>
+<button type="button" class="primary-btn" id="verifyPinBtn">Unlock Creator Desk</button>
+<button type="button" class="soft-action-btn" id="backToReaderBtn" style="width:100%; margin-top:8px;">Back to Notes</button>
+</div>
+
+<div id="creatorEditorView" style="display:none;">
+<div style="background:#FFF5EA; border:1.5px solid #E6D0B8; border-radius:16px; padding:12px; margin-bottom:14px;">
+<div style="font-weight:700; font-size:13.5px; margin-bottom:8px;" id="editorFormHeading">Write a New Note</div>
+<label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Nickname for this note (one at a time):</label>
+<select id="noteNicknameSelect" class="nick-select">
+<option value="Atlas">Atlas</option>
+<option value="Anshu">Anshu</option>
+<option value="Moonflower">Moonflower</option>
+</select>
+<textarea id="noteTextInput" rows="3" class="note-textarea" placeholder="heyyy... write something cozy with elongated words if u wanttt ✨"></textarea>
+<button type="button" class="primary-btn" id="saveNoteBtn">Publish Note with Timestamp</button>
+<button type="button" class="soft-action-btn" id="cancelEditBtn" style="width:100%; margin-top:6px; display:none;">Cancel Edit</button>
+</div>
+
+<div style="font-weight:700; font-size:13px; margin-bottom:8px;">All Notes (Edit or Delete)</div>
+<div id="creatorNotesManageList"></div>
+
+<button type="button" class="soft-action-btn" id="lockCreatorBtn" style="width:100%; margin-top:12px;">Lock & Exit Creator Desk</button>
+</div>
+</div>
+</div>
+
+<div class="modal-backdrop" id="renameModal">
+<div class="modal-sheet">
+<div class="modal-header">
+<h2 class="modal-title">Name Your Capybara</h2>
+<button type="button" class="close-modal-btn" data-close="renameModal">✕</button>
+</div>
+<p style="font-size:13px; color:var(--espresso-soft); margin-top:0;">
+Give your little bath capybara a cute name! It stays saved for next time.
+</p>
+<input type="text" maxlength="22" id="capyNameInput" class="name-input" placeholder="e.g. Espresso Puff, Mocha..." />
+<button type="button" class="primary-btn" id="saveCapyNameBtn">Save Name ☕</button>
+</div>
+</div>
+
+<script>
+(function() {
+var STORAGE_KEY = "caramel_capy_hugs_state_v1";
+var DEFAULT_PIN = "2110";
+var HOLD_DURATION_MS = 1500;
+var DAILY_GOAL = 5;
+var memoryStore = null;
+
+function loadRaw() {
+try {
+return window.localStorage.getItem(STORAGE_KEY);
+} catch (err) {
+return memoryStore;
+}
+}
+
+function saveRaw(text) {
+memoryStore = text;
+try {
+window.localStorage.setItem(STORAGE_KEY, text);
+} catch (err) {}
+}
+
+function formatStamp(d) {
+var date = d instanceof Date ? d : new Date(d);
+try {
+return date.toLocaleString("en-US", {
+month: "short",
+day: "numeric",
+year: "numeric",
+hour: "numeric",
+minute: "2-digit",
+hour12: true
+});
+} catch (err) {
+return date.toDateString();
+}
+}
+
+function getTodayKey() {
+var now = new Date();
+var m = now.getMonth() + 1;
+var day = now.getDate();
+return now.getFullYear() + "-" + (m < 10 ? "0" + m : m) + "-" + (day < 10 ? "0" + day : day);
+}
+
+function getDayIndexMonSun(dateObj) {
+var d = dateObj || new Date();
+var jsDay = d.getDay();
+return jsDay === 0 ? 6 : jsDay - 1;
+}
+
+var STARTER_NOTES = [
+{
+id: "n1",
+nickname: "Atlas",
+text: "heyyy Atlas... hope ur day isn't being too loud or tiring todayyy, here's a warm caramel hug just for uuu ☕✨",
+createdAt: "Nov 22, 2026, 9:15 PM",
+timestamp: Date.now() - 86400000 * 3
+},
+{
+id: "n2",
+nickname: "Anshu",
+text: "okayyy Anshu stop overthinking for five secondssss and drink some water or coffee plsss, i'm right hereee 🤎",
+createdAt: "Nov 22, 2026, 11:04 PM",
+timestamp: Date.now() - 86400000 * 2
+},
+{
+id: "n3",
+nickname: "Moonflower",
+text: "look how quiet everything feels when u slow down Moonflower... sending u the softest little squeeze right nowww 🌸🌙",
+createdAt: "Nov 23, 2026, 1:20 PM",
+timestamp: Date.now() - 86400000
+},
+{
+id: "n4",
+nickname: "Atlas",
+text: "soooo Atlas i made this little capy corner thinking about how u always keep things steadyyy, take a breather okayyy? 🧸💛",
+createdAt: "Nov 23, 2026, 4:45 PM",
+timestamp: Date.now() - 3600000 * 5
+},
+{
+id: "n5",
+nickname: "Anshu",
+text: "heyyy Anshu don't rush everything all at onceee, even tiny slow steps count sooooo muchhh ☕🌿",
+createdAt: "Nov 23, 2026, 7:10 PM",
+timestamp: Date.now() - 3600000 * 2
+},
+{
+id: "n6",
+nickname: "Moonflower",
+text: "okayyy Moonflower u earned this cozy pauseee, stay warm and keep shining quietly in ur own wayyy ✨🌕",
+createdAt: "Nov 23, 2026, 8:40 PM",
+timestamp: Date.now() - 1800000
+}
+ ];
+
+var REWARDS_CATALOG = [
+{ id: "hat_yuzu", cat: "hat", name: "Yuzu Mandarin", price: 0, icon: "🍊", desc: "Classic cozy citrus buddy" },
+{ id: "hat_crown", cat: "hat", name: "Starlight Crown", price: 6, icon: "👑", desc: "Tiny golden hug royalty" },
+{ id: "hat_sprout", cat: "hat", name: "Matcha Sprout", price: 8, icon: "🌱", desc: "Fresh little café leaf" },
+{ id: "hat_bow", cat: "hat", name: "Caramel Ribbon", price: 10, icon: "🎀", desc: "Sweet tied bow on top" },
+{ id: "hat_beret", cat: "hat", name: "Latte Beret", price: 14, icon: "🧁", desc: "Soft artist café look" },
+{ id: "neck_scarf", cat: "neck", name: "Caramel Scarf", price: 5, icon: "🧣", desc: "Extra toasty knit wrap" },
+{ id: "neck_glasses", cat: "neck", name: "Cozy Round Glasses", price: 9, icon: "👓", desc: "Studious soft vibe" },
+{ id: "neck_bowtie", cat: "neck", name: "Espresso Bowtie", price: 12, icon: "🤎", desc: "Dapper little gentleman" },
+{ id: "bath_onsen", cat: "bath", name: "Warm Onsen Blue", price: 0, icon: "🛁", desc: "Soothing sky-blue hot spring" },
+{ id: "bath_latte", cat: "bath", name: "Caramel Latte Tub", price: 7, icon: "☕", desc: "Creamy milk-coffee bath" },
+{ id: "bath_moon", cat: "bath", name: "Midnight Moonflower", price: 12, icon: "🌙", desc: "Starry twilight soak" }
+ ];
+
+function createDefaultState() {
+return {
+capyName: "Caramel Bean",
+totalHugs: 0,
+stars: 0,
+dailyGoalClaimedDate: null,
+lastActiveDate: getTodayKey(),
+streakDays: 1,
+weeklyHugs: [0, 0, 0, 0, 0, 0, 0],
+ownedRewards: ["hat_yuzu", "bath_onsen"],
+equipped: {
+hat: "hat_yuzu",
+neck: null,
+bath: "bath_onsen"
+},
+notes: STARTER_NOTES.slice(),
+seenNoteIds: [],
+creatorPin: DEFAULT_PIN,
+soundEnabled: true,
+noteCursor: 0
+};
+}
+
+function loadState() {
+try {
+var raw = loadRaw();
+if (!raw) return createDefaultState();
+var parsed = JSON.parse(raw);
+var base = createDefaultState();
+var eq = parsed.equipped || {};
+var merged = {
+capyName: parsed.capyName || base.capyName,
+totalHugs: Number(parsed.totalHugs) || 0,
+stars: Number(parsed.stars) || 0,
+dailyGoalClaimedDate: parsed.dailyGoalClaimedDate || null,
+lastActiveDate: parsed.lastActiveDate || getTodayKey(),
+streakDays: Number(parsed.streakDays) || 1,
+weeklyHugs: (parsed.weeklyHugs && parsed.weeklyHugs.length === 7) ? parsed.weeklyHugs : base.weeklyHugs.slice(),
+ownedRewards: (parsed.ownedRewards && parsed.ownedRewards.length) ? parsed.ownedRewards : base.ownedRewards.slice(),
+equipped: {
+hat: eq.hat || "hat_yuzu",
+neck: eq.neck || null,
+bath: eq.bath || "bath_onsen"
+},
+notes: (parsed.notes && parsed.notes.length) ? parsed.notes : STARTER_NOTES.slice(),
+seenNoteIds: parsed.seenNoteIds || [],
+creatorPin: parsed.creatorPin || DEFAULT_PIN,
+soundEnabled: parsed.soundEnabled !== false,
+noteCursor: Number(parsed.noteCursor) || 0
+};
+return merged;
+} catch (err) {
+return createDefaultState();
+}
+}
+
+function escapeHtml(str) {
+return String(str || "")
+.replace(/&/g, "&amp;")
+.replace(/</g, "&lt;")
+.replace(/>/g, "&gt;")
+.replace(/"/g, "&quot;");
+}
+
+function startApp() {
+var state = loadState();
+var isCreatorUnlocked = false;
+var editingNoteId = null;
+var currentRewardCat = "all";
+
+function persistAndRender() {
+saveRaw(JSON.stringify(state));
+renderAll();
+}
+
+function playChime() {
+if (!state.soundEnabled) return;
+try {
+var AudioCtor = window.AudioContext || window.webkitAudioContext;
+if (!AudioCtor) return;
+var ctx = new AudioCtor();
+var osc = ctx.createOscillator();
+var gain = ctx.createGain();
+osc.type = "sine";
+osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.18);
+gain.gain.setValueAtTime(0.06, ctx.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.28);
+osc.connect(gain);
+gain.connect(ctx.destination);
+osc.start();
+osc.stop(ctx.currentTime + 0.29);
+} catch (err) {}
+}
+
+function getUnreadCount() {
+var count = 0;
+for (var i = 0; i < state.notes.length; i++) {
+if (state.seenNoteIds.indexOf(state.notes[i].id) === -1) count++;
+}
+return count;
+}
+
+function renderEquipped() {
+var hat = state.equipped.hat || "hat_yuzu";
+var neck = state.equipped.neck;
+var bath = state.equipped.bath || "bath_onsen";
+
+var defaultYuzu = document.getElementById("defaultYuzu");
+var headLayer = document.getElementById("equipHeadLayer");
+var neckLayer = document.getElementById("equipNeckLayer");
+var bathSurface = document.getElementById("bathWaterSurface");
+
+if (defaultYuzu) defaultYuzu.style.display = hat === "hat_yuzu" ? "block" : "none";
+
+if (headLayer) {
+if (hat === "hat_crown") {
+headLayer.innerHTML = '<path d="M158 98 L164 78 L180 91 L196 78 L202 98 Z" fill="#F4B942" stroke="#B87E14" stroke-width="2" />';
+} else if (hat === "hat_sprout") {
+headLayer.innerHTML = '<path d="M180 96 Q168 74 156 82 Q168 90 180 96 Z" fill="#68A369" /><path d="M180 96 Q192 74 204 82 Q192 90 180 96 Z" fill="#82BC7E" />';
+} else if (hat === "hat_bow") {
+headLayer.innerHTML = '<circle cx="180" cy="92" r="6" fill="#E87A90" /><polygon points="180,92 162,82 164,102" fill="#F497A9" /><polygon points="180,92 198,82 196,102" fill="#F497A9" />';
+} else if (hat === "hat_beret") {
+headLayer.innerHTML = '<ellipse cx="182" cy="91" rx="34" ry="13" transform="rotate(-8 182 91)" fill="#C68B59" /><path d="M182 79 L185 73" stroke="#593319" stroke-width="3" stroke-linecap="round" />';
+} else {
+headLayer.innerHTML = "";
+}
+}
+
+if (neckLayer) {
+if (neck === "neck_scarf") {
+neckLayer.innerHTML = '<rect x="134" y="198" width="92" height="16" rx="8" fill="#D48C46" /><rect x="196" y="208" width="16" height="24" rx="7" fill="#B87333" />';
+} else if (neck === "neck_glasses") {
+neckLayer.innerHTML = '<circle cx="147" cy="150" r="13" fill="none" stroke="#4A3222" stroke-width="2.6" /><circle cx="213" cy="150" r="13" fill="none" stroke="#4A3222" stroke-width="2.6" /><line x1="160" y1="150" x2="200" y2="150" stroke="#4A3222" stroke-width="2.5" />';
+} else if (neck === "neck_bowtie") {
+neckLayer.innerHTML = '<polygon points="180,204 164,196 164,212" fill="#8C4A27" /><polygon points="180,204 196,196 196,212" fill="#8C4A27" /><circle cx="180" cy="204" r="5" fill="#F4B942" />';
+} else {
+neckLayer.innerHTML = "";
+}
+}
+
+if (bathSurface) {
+if (bath === "bath_latte") bathSurface.setAttribute("fill", "url(#latteBathGrad)");
+else if (bath === "bath_moon") bathSurface.setAttribute("fill", "url(#moonBathGrad)");
+else bathSurface.setAttribute("fill", "url(#bathWaterGrad)");
+}
+}
+
+function renderStatsModal() {
+var todayIdx = getDayIndexMonSun(new Date());
+var todayHugs = state.weeklyHugs[todayIdx] || 0;
+
+document.getElementById("statTotalHugs").textContent = state.totalHugs;
+document.getElementById("statStarsBalance").textContent = state.stars + " ⭐";
+document.getElementById("statTodayHugs").textContent = todayHugs;
+document.getElementById("statStreakDays").textContent = state.streakDays + "🔥";
+
+var ranks = [
+{ min: 0, title: "Lv.1 Sleepy Espresso Bean", next: 10 },
+{ min: 10, title: "Lv.2 Caramel Drizzle Cuddler", next: 25 },
+{ min: 25, title: "Lv.3 Cozy Latte Whisperer", next: 50 },
+{ min: 50, title: "Lv.4 Starlight Hug Keeper", next: 100 },
+{ min: 100, title: "Lv.5 Supreme Moonflower Hugger", next: 200 }
+ ];
+var currentRank = ranks[0];
+for (var i = 0; i < ranks.length; i++) {
+if (state.totalHugs >= ranks[i].min) currentRank = ranks[i];
+}
+var pct = Math.min(100, Math.round((Math.max(0, state.totalHugs - currentRank.min) / Math.max(1, currentRank.next - currentRank.min)) * 100));
+document.getElementById("rankTitle").textContent = currentRank.title;
+document.getElementById("rankXpText").textContent = state.totalHugs + " / " + currentRank.next + " Hugs";
+document.getElementById("rankProgressBar").style.width = pct + "%";
+
+var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var maxVal = 5;
+for (var j = 0; j < state.weeklyHugs.length; j++) {
+if (state.weeklyHugs[j] > maxVal) maxVal = state.weeklyHugs[j];
+}
+var html = "";
+for (var k = 0; k < days.length; k++) {
+var val = state.weeklyHugs[k] || 0;
+var hPct = Math.round((val / maxVal) * 100);
+html += '<div class="bar-col"><div class="bar-num">' + val + '</div><div class="bar-track"><div class="bar-fill" style="height:' + hPct + '%"></div></div><div class="bar-day">' + days[k] + '</div></div>';
+}
+document.getElementById("weeklyBarsContainer").innerHTML = html;
+}
+
+function renderRewardsModal() {
+document.getElementById("shopModalStars").textContent = state.stars;
+var grid = document.getElementById("rewardsGrid");
+var list = [];
+for (var i = 0; i < REWARDS_CATALOG.length; i++) {
+if (currentRewardCat === "all" || REWARDS_CATALOG[i].cat === currentRewardCat) {
+list.push(REWARDS_CATALOG[i]);
+}
+}
+var html = "";
+for (var j = 0; j < list.length; j++) {
+var item = list[j];
+var owned = state.ownedRewards.indexOf(item.id) !== -1;
+var equipped = state.equipped[item.cat] === item.id;
+var btn = "";
+if (!owned) {
+var disabledAttr = state.stars >= item.price ? "" : " disabled";
+btn = '<button type="button" class="reward-btn buy"' + disabledAttr + ' data-buy="' + item.id + '">Unlock • ' + item.price + ' ⭐</button>';
+} else if (equipped) {
+btn = '<button type="button" class="reward-btn equipped" data-unequip="' + item.cat + '">Equipped ✓</button>';
+} else {
+btn = '<button type="button" class="reward-btn equip" data-equip-cat="' + item.cat + '" data-equip-id="' + item.id + '">Equip</button>';
+}
+html += '<div class="reward-card"><div><div class="reward-emoji">' + item.icon + '</div><div class="reward-name">' + item.name + '</div><div class="reward-desc">' + item.desc + '</div></div>' + btn + '</div>';
+}
+grid.innerHTML = html;
+}
+
+function renderNotesModal() {
+var sorted = state.notes.slice().sort(function(a, b) {
+return (b.timestamp || 0) - (a.timestamp || 0);
+});
+var readerHtml = "";
+var manageHtml = "";
+
+for (var i = 0; i < sorted.length; i++) {
+var n = sorted[i];
+var isNew = state.seenNoteIds.indexOf(n.id) === -1;
+readerHtml += '<div class="note-entry-card' + (isNew ? ' is-new' : '') + '"><div class="note-stamp"><span>For ' + escapeHtml(n.nickname) + ' • ' + escapeHtml(n.createdAt) + '</span>' + (isNew ? '<span class="new-pill">NEW</span>' : '') + '</div><p class="note-body-text" style="font-size:17px;">' + escapeHtml(n.text) + '</p></div>';
+manageHtml += '<div class="note-entry-card"><div class="note-stamp"><span>For ' + escapeHtml(n.nickname) + ' • ' + escapeHtml(n.createdAt) + '</span></div><p class="note-body-text" style="font-size:16px;">' + escapeHtml(n.text) + '</p><div class="mini-action-row"><button type="button" class="mini-btn edit" data-edit-note="' + n.id + '">Edit</button><button type="button" class="mini-btn del" data-del-note="' + n.id + '">Delete</button></div></div>';
+}
+
+document.getElementById("notesListContainer").innerHTML = readerHtml;
+document.getElementById("creatorNotesManageList").innerHTML = manageHtml;
+}
+
+function showReaderView() {
+document.getElementById("notesModalTitle").textContent = "Notes Written For You 💌";
+document.getElementById("readerNotesView").style.display = "block";
+document.getElementById("pinGateView").style.display = "none";
+document.getElementById("creatorEditorView").style.display = "none";
+}
+
+function openPinPrompt() {
+document.getElementById("notesModalTitle").textContent = "Creator Desk 🔒";
+document.getElementById("readerNotesView").style.display = "none";
+document.getElementById("pinGateView").style.display = "block";
+document.getElementById("creatorEditorView").style.display = "none";
+document.getElementById("pinInputField").value = "";
+document.getElementById("pinErrorMsg").style.display = "none";
+}
+
+function cancelNoteEdit() {
+editingNoteId = null;
+document.getElementById("editorFormHeading").textContent = "Write a New Note";
+document.getElementById("noteTextInput").value = "";
+document.getElementById("saveNoteBtn").textContent = "Publish Note with Timestamp";
+document.getElementById("cancelEditBtn").style.display = "none";
+}
+
+function lockCreatorMode() {
+isCreatorUnlocked = false;
+cancelNoteEdit();
+showReaderView();
+}
+
+function openModal(id) {
+var modal = document.getElementById(id);
+if (!modal) return;
+if (id === "notesModal") {
+showReaderView();
+if (!isCreatorUnlocked) {
+for (var i = 0; i < state.notes.length; i++) {
+if (state.seenNoteIds.indexOf(state.notes[i].id) === -1) {
+state.seenNoteIds.push(state.notes[i].id);
+}
+}
+saveRaw(JSON.stringify(state));
+}
+renderNotesModal();
+} else if (id === "statsModal") {
+renderStatsModal();
+} else if (id === "rewardsModal") {
+renderRewardsModal();
+} else if (id === "renameModal") {
+document.getElementById("capyNameInput").value = state.capyName;
+}
+modal.className = "modal-backdrop open";
+renderBadges();
+}
+
+function closeModal(id) {
+var modal = document.getElementById(id);
+if (modal) modal.className = "modal-backdrop";
+}
+
+function renderBadges() {
+var dot = document.getElementById("unreadRedDot");
+if (!dot) return;
+if (getUnreadCount() > 0 && !isCreatorUnlocked) {
+dot.className = "unread-red-dot show";
+} else {
+dot.className = "unread-red-dot";
+}
+}
+
+function renderAll() {
+var todayIdx = getDayIndexMonSun(new Date());
+var todayHugs = state.weeklyHugs[todayIdx] || 0;
+
+document.getElementById("topHugsCount").textContent = state.totalHugs;
+document.getElementById("topStarsCount").textContent = state.stars;
+document.getElementById("shopStarPreview").textContent = state.stars;
+document.getElementById("notesBadgeCount").textContent = state.notes.length;
+document.getElementById("capyNameDisplay").textContent = state.capyName;
+document.getElementById("dailyGoalText").textContent = Math.min(todayHugs, DAILY_GOAL) + "/" + DAILY_GOAL + " ⭐";
+document.getElementById("soundToggleBtn").textContent = state.soundEnabled ? "🔊" : "🔇";
+
+renderEquipped();
+renderBadges();
+
+if (document.getElementById("statsModal").className.indexOf("open") !== -1) renderStatsModal();
+if (document.getElementById("rewardsModal").className.indexOf("open") !== -1) renderRewardsModal();
+if (document.getElementById("notesModal").className.indexOf("open") !== -1) renderNotesModal();
+}
+
+// Hold-to-Hug Interval Timer
+var holdTimer = null;
+var holdStart = 0;
+var hugGranted = false;
+
+function completeHugNow() {
+var dayIdx = getDayIndexMonSun(new Date());
+state.totalHugs += 1;
+state.stars += 1;
+state.weeklyHugs[dayIdx] = (state.weeklyHugs[dayIdx] || 0) + 1;
+
+var todayKey = getTodayKey();
+var bonus = "";
+if (state.weeklyHugs[dayIdx] >= DAILY_GOAL && state.dailyGoalClaimedDate !== todayKey) {
+state.stars += 2;
+state.dailyGoalClaimedDate = todayKey;
+bonus = " +2⭐ Goal!";
+}
+
+var notes = state.notes.length ? state.notes : STARTER_NOTES;
+var noteObj = notes[state.noteCursor % notes.length];
+state.noteCursor = (state.noteCursor + 1) % notes.length;
+
+document.getElementById("hugNoteNicknameTag").textContent = "💌 For " + noteObj.nickname + " • " + state.capyName;
+document.getElementById("hugNoteTimeTag").textContent = noteObj.createdAt;
+document.getElementById("hugNoteText").textContent = noteObj.text;
+
+var pop = document.createElement("div");
+pop.className = "floating-pop";
+pop.textContent = "+1 Hug & +1 ⭐" + bonus;
+pop.style.left = "50%";
+pop.style.top = "36%";
+pop.style.transform = "translateX(-50%)";
+document.getElementById("stageWrap").appendChild(pop);
+setTimeout(function() {
+if (pop && pop.parentNode) pop.parentNode.removeChild(pop);
+}, 1100);
+
+playChime();
+persistAndRender();
+}
+
+function beginHugHold(e) {
+if (e && e.cancelable) e.preventDefault();
+if (holdTimer) clearInterval(holdTimer);
+holdStart = Date.now();
+hugGranted = false;
+
+document.getElementById("stageWrap").className = "stage-wrap hugging";
+document.getElementById("capyAnimGroup").className = "capy-squish";
+document.getElementById("eyesNormal").style.display = "none";
+document.getElementById("eyesHappy").style.display = "block";
+
+holdTimer = setInterval(function() {
+var elapsed = Date.now() - holdStart;
+var pct = Math.min(100, (elapsed / HOLD_DURATION_MS) * 100);
+document.getElementById("holdMeterFill").style.width = pct + "%";
+if (elapsed >= HOLD_DURATION_MS && !hugGranted) {
+hugGranted = true;
+completeHugNow();
+}
+}, 50);
+}
+
+function stopHugHold() {
+if (holdTimer) {
+clearInterval(holdTimer);
+holdTimer = null;
+}
+document.getElementById("holdMeterFill").style.width = "0%";
+document.getElementById("stageWrap").className = "stage-wrap";
+document.getElementById("capyAnimGroup").className = "capy-idle";
+document.getElementById("eyesHappy").style.display = "none";
+document.getElementById("eyesNormal").style.display = "block";
+}
+
+var capyTarget = document.getElementById("capySvg");
+capyTarget.addEventListener("contextmenu", function(e) { e.preventDefault(); });
+capyTarget.addEventListener("touchstart", beginHugHold, { passive: false });
+capyTarget.addEventListener("mousedown", beginHugHold);
+window.addEventListener("touchend", stopHugHold);
+window.addEventListener("touchcancel", stopHugHold);
+window.addEventListener("mouseup", stopHugHold);
+
+// Button Clicks
+document.getElementById("statsPillBtn").addEventListener("click", function() { openModal("statsModal"); });
+document.getElementById("notesHeaderBtn").addEventListener("click", function() { openModal("notesModal"); });
+document.getElementById("openShopQuickBtn").addEventListener("click", function() { openModal("rewardsModal"); });
+document.getElementById("openNotesQuickBtn").addEventListener("click", function() { openModal("notesModal"); });
+document.getElementById("capyNameChipBtn").addEventListener("click", function() { openModal("renameModal"); });
+document.getElementById("statsToShopBtn").addEventListener("click", function() {
+closeModal("statsModal");
+openModal("rewardsModal");
+});
+document.getElementById("soundToggleBtn").addEventListener("click", function() {
+state.soundEnabled = !state.soundEnabled;
+persistAndRender();
+});
+
+var closeButtons = document.querySelectorAll("[data-close]");
+for (var c = 0; c < closeButtons.length; c++) {
+closeButtons[c].addEventListener("click", function() {
+closeModal(this.getAttribute("data-close"));
+});
+}
+
+var backdrops = document.querySelectorAll(".modal-backdrop");
+for (var b = 0; b < backdrops.length; b++) {
+backdrops[b].addEventListener("click", function(e) {
+if (e.target === this) closeModal(this.id);
+});
+}
+
+var catTabs = document.querySelectorAll(".cat-tab");
+for (var t = 0; t < catTabs.length; t++) {
+catTabs[t].addEventListener("click", function() {
+currentRewardCat = this.getAttribute("data-cat") || "all";
+for (var x = 0; x < catTabs.length; x++) catTabs[x].className = "cat-tab";
+this.className = "cat-tab active";
+renderRewardsModal();
+});
+}
+
+document.getElementById("rewardsGrid").addEventListener("click", function(e) {
+var target = e.target;
+while (target && target !== this && !target.getAttribute("data-buy") && !target.getAttribute("data-equip-id") && !target.getAttribute("data-unequip")) {
+target = target.parentNode;
+}
+if (!target || target === this) return;
+
+var buyId = target.getAttribute("data-buy");
+if (buyId) {
+var found = null;
+for (var i = 0; i < REWARDS_CATALOG.length; i++) {
+if (REWARDS_CATALOG[i].id === buyId) found = REWARDS_CATALOG[i];
+}
+if (found && state.ownedRewards.indexOf(buyId) === -1 && state.stars >= found.price) {
+state.stars -= found.price;
+state.ownedRewards.push(buyId);
+state.equipped[found.cat] = buyId;
+playChime();
+persistAndRender();
+}
+return;
+}
+
+var eqId = target.getAttribute("data-equip-id");
+if (eqId) {
+var eqCat = target.getAttribute("data-equip-cat");
+if (state.ownedRewards.indexOf(eqId) !== -1) {
+state.equipped[eqCat] = eqId;
+playChime();
+persistAndRender();
+}
+return;
+}
+
+var uneqCat = target.getAttribute("data-unequip");
+if (uneqCat) {
+if (uneqCat === "hat") state.equipped.hat = "hat_yuzu";
+else if (uneqCat === "bath") state.equipped.bath = "bath_onsen";
+else state.equipped[uneqCat] = null;
+persistAndRender();
+}
+});
+
+document.getElementById("openPinBtn").addEventListener("click", openPinPrompt);
+document.getElementById("backToReaderBtn").addEventListener("click", showReaderView);
+document.getElementById("lockCreatorBtn").addEventListener("click", lockCreatorMode);
+document.getElementById("cancelEditBtn").addEventListener("click", cancelNoteEdit);
+
+document.getElementById("verifyPinBtn").addEventListener("click", function() {
+var val = document.getElementById("pinInputField").value.trim();
+if (val === (state.creatorPin || DEFAULT_PIN)) {
+isCreatorUnlocked = true;
+document.getElementById("notesModalTitle").textContent = "Trisha's Creator Desk ✍️";
+document.getElementById("pinGateView").style.display = "none";
+document.getElementById("creatorEditorView").style.display = "block";
+renderNotesModal();
+} else {
+document.getElementById("pinErrorMsg").style.display = "block";
+}
+});
+
+document.getElementById("saveNoteBtn").addEventListener("click", function() {
+if (!isCreatorUnlocked) return;
+var txt = document.getElementById("noteTextInput").value.trim();
+var nick = document.getElementById("noteNicknameSelect").value;
+if (!txt) return;
+
+if (editingNoteId) {
+for (var i = 0; i < state.notes.length; i++) {
+if (state.notes[i].id === editingNoteId) {
+state.notes[i].text = txt;
+state.notes[i].nickname = nick;
+state.notes[i].createdAt = formatStamp(new Date()) + " (edited)";
+state.notes[i].timestamp = Date.now();
+var idx = state.seenNoteIds.indexOf(editingNoteId);
+if (idx !== -1) state.seenNoteIds.splice(idx, 1);
+}
+}
+cancelNoteEdit();
+} else {
+state.notes.unshift({
+id: "note_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+nickname: nick,
+text: txt,
+createdAt: formatStamp(new Date()),
+timestamp: Date.now()
+});
+document.getElementById("noteTextInput").value = "";
+}
+
+playChime();
+persistAndRender();
+});
+
+document.getElementById("creatorNotesManageList").addEventListener("click", function(e) {
+var target = e.target;
+while (target && target !== this && !target.getAttribute("data-edit-note") && !target.getAttribute("data-del-note")) {
+target = target.parentNode;
+}
+if (!target || target === this) return;
+
+var editId = target.getAttribute("data-edit-note");
+if (editId) {
+for (var i = 0; i < state.notes.length; i++) {
+if (state.notes[i].id === editId) {
+editingNoteId = editId;
+document.getElementById("editorFormHeading").textContent = "Editing Note";
+document.getElementById("noteNicknameSelect").value = state.notes[i].nickname || "Atlas";
+document.getElementById("noteTextInput").value = state.notes[i].text;
+document.getElementById("saveNoteBtn").textContent = "Save Updated Note";
+document.getElementById("cancelEditBtn").style.display = "block";
+return;
+}
+}
+}
+
+var delId = target.getAttribute("data-del-note");
+if (delId) {
+var nextNotes = [];
+for (var j = 0; j < state.notes.length; j++) {
+if (state.notes[j].id !== delId) nextNotes.push(state.notes[j]);
+}
+state.notes = nextNotes;
+if (editingNoteId === delId) cancelNoteEdit();
+persistAndRender();
+}
+});
+
+document.getElementById("saveCapyNameBtn").addEventListener("click", function() {
+var val = document.getElementById("capyNameInput").value.trim();
+if (val) {
+state.capyName = val;
+persistAndRender();
+}
+closeModal("renameModal");
+});
+
+renderAll();
+}
+
+if (document.readyState === "loading") {
+document.addEventListener("DOMContentLoaded", startApp);
+} else {
+startApp();
+}
+})();
+</script>
+</body>
+</html>
